@@ -1,0 +1,24 @@
+var Gpio = require('onoff').Gpio;
+var Merah = new Gpio(4, 'out');
+var Kuning = new Gpio(23, 'out');
+var Hijau = new Gpio(24, 'out');
+
+while (true) {
+    Merah.writeSync(1); 
+    console.log("Lampu merah menyala");
+    sleep(3000);
+    Kuning.writeSync(1);
+    console.log("Lampu merah dan kuning menyala");
+    sleep(3000);
+    Merah.writeSync(0);
+    Kuning.writeSync(0);
+    Hijau.writeSync(1);
+    console.log("Lampu merah dan kuning mati, hijau menyala ");
+    sleep(3000);
+    Hijau.writeSync(0);
+    Kuning.writeSync(1); 
+    console.log("Lampu hijau mati, kuning menyala");
+    sleep(3000);
+    Kuning.writeSync(0);
+    console.log("Lampu kuning mati");
+}
