@@ -1,0 +1,106 @@
+var Gpio = require('onoff').Gpio;
+var LED1 = new Gpio(4, 'out'), 
+    LED2 = new Gpio(22, 'out'),
+    LED3 = new Gpio(23, 'out'),
+    LED4 = new Gpio(24, 'out'),
+    LED5 = new Gpio(21, 'out');
+var leds = [LED1, LED2, LED3, LED4, LED5];
+
+while(true) {
+  mode1(leds);
+};
+
+function mode1 (array){
+    for (var indexCount=0 in leds) {
+        leds[indexCount].writeSync(1); 
+        console.log("led nyala= " + indexCount);
+        indexCount++;
+    };
+    for (var indexCount=0 in leds) {
+        leds[indexCount].writeSync(0); 
+        console.log("led mati= " + indexCount);
+        indexCount++;
+    };
+};
+
+
+function mode2 (array){
+    for (var indexCount=4; indexCount>=0; indexCount--) {
+        leds[indexCount].writeSync(1); 
+        console.log("led nyala= " + indexCount);
+    };
+    for (var indexCount=4; indexCount>=0; indexCount--) {
+        leds[indexCount].writeSync(0); 
+        console.log("led mati= " + indexCount);
+    };
+};
+
+
+function mode3 (array){
+    leds[0].writeSync(1);
+    console.log("led hidup= 0"); 
+    sleep(100);
+    leds[0].writeSync(0);
+    console.log("led mati= 0"); 
+    leds[4].writeSync(1);
+    console.log("led hidup= 4"); 
+    sleep(100);
+    leds[4].writeSync(0);
+    console.log("led mati= 4"); 
+    leds[1].writeSync(1);
+    console.log("led hidup= 1"); 
+    sleep(100);
+    leds[1].writeSync(0);
+    console.log("led mati= 1"); 
+    leds[3].writeSync(1);
+    console.log("led hidup= 3"); 
+    sleep(100);
+    leds[3].writeSync(0);
+    console.log("led mati= 3"); 
+    leds[2].writeSync(1);
+    console.log("led hidup= 2"); 
+    sleep(100);
+    leds[2].writeSync(0);
+    console.log("led mati= 2"); 
+};
+
+function mode4 (array){
+    leds[2].writeSync(1);
+    console.log("led hidup= 2");
+    sleep(100);
+    leds[3].writeSync(1);
+    leds[1].writeSync(1);
+    console.log("led hidup= 3");
+    console.log("led hidup= 1");
+    sleep(100);
+    leds[4].writeSync(1);
+    leds[0].writeSync(1);
+    console.log("led hidup= 4");
+    console.log("led hidup= 0");
+    sleep(100);
+    leds[2].writeSync(0);
+    console.log("led mati= 2");
+    leds[3].writeSync(0);
+    leds[1].writeSync(0);
+    console.log("led mati= 3");
+    console.log("led mati= 1");
+    leds[4].writeSync(0);
+    leds[0].writeSync(0);
+    console.log("led mati= 4");
+    console.log("led mati= 0");
+
+};
+
+function mode5 (array){
+    var min =0;
+    var max = 4;
+    var step1 = max - min + 1;
+    var step2 = Math.random()*step1;
+    var result = Math.floor(step2) + min;
+
+    leds[result].writeSync(1);
+    console.log("led hidup= " + result);
+    sleep(1000)
+    leds[result].writeSync(0);
+    console.log("led mati= " + result);
+};
